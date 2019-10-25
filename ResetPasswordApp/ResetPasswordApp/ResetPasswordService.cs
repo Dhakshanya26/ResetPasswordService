@@ -77,7 +77,7 @@ namespace ResetPasswordApp
             if (userDto != null && !string.IsNullOrEmpty(userDto.EmailAddress))
             {
                 var response = _dbContext.SentEmailDtos.Where(x => x.Recipient == userDto.EmailAddress
-                                                                   && x.Subject == subject).ToList();
+                                                               && x.IsSentSuccessful  && x.Subject == subject).ToList();
                 return response.Any();
             }
 
