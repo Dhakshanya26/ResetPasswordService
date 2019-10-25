@@ -35,10 +35,11 @@ namespace ResetPasswordApp
                         {
                             if (CheckWhetherEmailSentDetail(user, emailSubject))
                             {
-                                await _emailService.SendEmail(user.EmailAddress, emailSubject, user.Name,
+                                var response = await _emailService.SendEmail(user.EmailAddress, emailSubject, user.Name,
                                     resetPasswordUrl);
                                 _logger.LogInformation($"Email sent to {user.Name}");
-                            }
+                                AddSentEmailDetail(user,resetPasswordUrl, subject, response);
+}
                         }
                         catch (Exception ex)
                         {
